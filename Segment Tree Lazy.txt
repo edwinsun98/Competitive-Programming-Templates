@@ -1,0 +1,51 @@
+struct segT{
+    int n;
+    ll arr[1000001], tree[4000001], lazy[4000001];
+    void updateRange(int node, int start, int endd, int l, int r, ll val){
+        if(lazy[node] != 0){
+            tree[node] += (endd - start + 1) * lazy[node];
+            if(start != endd){
+                lazy[node*2] += lazy[node];
+                lazy[node*2+1] += lazy[node];
+            }
+            lazy[node] = 0;
+        }
+        if(start > endd or start > r or endd < l)
+            return;
+        if(start >= l and endd <= r){
+            tree[node] += (endd - start + 1) * val;
+            if(start != endd){
+                lazy[node*2] += val;
+                lazy[node*2+1] += val;
+            }
+            return;
+        }
+        int mid = (start + endd) / 2;
+        updateRange(node*2, start, mid, l, r, val);
+        updateRange(node*2 + 1, mid + 1, endd, l, r, val);
+        tree[node] = tree[node*2] + tree[node*2+1];
+    }
+    void updateR(int l, int r, ll val){ //increment
+        updateRange(1,1 ,n ,l ,r, val);
+    }
+    ll queryRange(int node, int start, int endd, int l, int r){
+        if(start > endd or start > r or endd < l)return 0;
+        if(lazy[node] != 0){
+            tree[node] += (endd - start + 1) * lazy[node];
+            if(start != endd){
+                lazy[node*2] += lazy[node];
+                lazy[node*2+1] += lazy[node];
+            }
+            lazy[node] = 0;
+        }
+        if(start >= l and endd <= r)
+            return tree[node];
+        int mid = (start + endd) / 2;
+        int p1 = queryRange(node*2, start, mid, l, r);
+        int p2 = queryRange(node*2 + 1, mid + 1, endd, l, r);
+        return (p1 + p2);
+    }
+    ll queryR(int l, int r){
+        return queryRange(1, 1, n, l, r);
+    }
+};
