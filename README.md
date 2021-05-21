@@ -1,2 +1,2 @@
-# templates for competitive programming and convenience
-# contains frequently used data structures and methods
+# Templates for competitive programming and convenience
+# Contains frequently used data structures and algorithmns
