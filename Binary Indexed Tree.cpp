@@ -1,4 +1,3 @@
-/*---------Binary Indexed Tree---------*/
 struct bit{
     ll bit[1000005];
     void update(int x, ll v){
@@ -10,4 +9,3 @@ struct bit{
         return sum;
     }
 };
-/*---------Binary Indexed Tree End---------*/v
