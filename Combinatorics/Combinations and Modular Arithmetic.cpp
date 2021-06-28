@@ -4,7 +4,7 @@ ll add(ll a, ll b){
     return (a+b)%mod;
 }
 ll sub(ll a, ll b){
-    return ((a-b)+mod)%mod;
+    return ((a-b)%mod+mod)%mod;
 }
 ll mult(ll a, ll b){
     return ((a%mod)*(b%mod))%mod;
